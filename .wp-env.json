@@ -1,0 +1,8 @@
+{
+	"plugins": [
+		"./wp-content/plugins/chiilog-iapi-tabs"
+	],
+	"mappings": {
+		"wp-content/plugins": "./wp-content/plugins"
+	}
+}

@@ -44,3 +44,4 @@ phpunit-watcher.yml
 
 # WordPress Plugins
 wp-content/plugins/*
+!wp-content/plugins/chiilog-iapi-tabs
