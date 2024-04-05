@@ -1,0 +1,23 @@
+{
+  "name": "@chiilog/iapi-tabs",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Interactivity API を使ったタブブロック",
+  "main": "index.js",
+  "scripts": {
+    "wp-env": "wp-env"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/chiilog/iapi-tabs.git"
+  },
+  "author": "Chiaki Okamoto",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/chiilog/iapi-tabs/issues"
+  },
+  "homepage": "https://github.com/chiilog/iapi-tabs#readme",
+  "devDependencies": {
+    "@wordpress/env": "^9.7.0"
+  }
+}
