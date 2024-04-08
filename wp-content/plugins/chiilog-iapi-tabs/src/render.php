@@ -8,14 +8,20 @@
  */
 ?>
 <div <?php echo get_block_wrapper_attributes(); ?>>
-	<ul class="flex">
-		<li>ナビ1</li>
-		<li>ナビ2</li>
-		<li>ナビ3</li>
+	<ul class="tab-nav">
+		<li class="tab-nav__item">
+			<button class="tab-nav__button is-active">ナビ1</button>
+		</li>
+		<li class="tab-nav__item">
+			<button class="tab-nav__button">ナビ2</button>
+		</li>
+		<li class="tab-nav__item">
+			<button class="tab-nav__button">ナビ3</button>
+		</li>
 	</ul>
-	<div class="panels">
-		<div class="panel">パネル1</div>
-		<div class="panel">パネル2</div>
-		<div class="panel">パネル3</div>
+	<div class="tab-panels">
+		<div class="tab-panel is-active">パネル1</div>
+		<div class="tab-panel">パネル2</div>
+		<div class="tab-panel">パネル3</div>
 	</div>
 </div>

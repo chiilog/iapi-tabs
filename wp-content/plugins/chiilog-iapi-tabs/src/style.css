@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.tab-nav {
+	@apply flex justify-between gap-x-px list-none pl-0 m-0;
+}
+
+.tab-nav__item {
+	@apply flex-1 text-center;
+}
+
+.tab-nav__button {
+	@apply appearance-none bg-gray-200 block py-2.5 px-3 font-bold border-none w-full;
+
+	&.is-active {
+		@apply bg-red-400 text-white;
+	}
+}
+
+.tab-panel {
+	@apply border-0 border-t-4 border-solid border-red-400 p-4 hidden;
+
+	&.is-active {
+		@apply block;
+	}
+}
