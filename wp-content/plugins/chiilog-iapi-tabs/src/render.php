@@ -6,8 +6,16 @@
  *
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
-
 ?>
-<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
-	Block!
+<div <?php echo get_block_wrapper_attributes(); ?>>
+	<ul class="flex">
+		<li>ナビ1</li>
+		<li>ナビ2</li>
+		<li>ナビ3</li>
+	</ul>
+	<div class="panels">
+		<div class="panel">パネル1</div>
+		<div class="panel">パネル2</div>
+		<div class="panel">パネル3</div>
+	</div>
 </div>

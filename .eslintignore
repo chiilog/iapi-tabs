@@ -1,0 +1,6 @@
+node_modules
+vendor
+build
+wp-content/plugins/*
+!wp-content/plugins/kek-blocks
+wp-content/themes/kek/js
