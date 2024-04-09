@@ -1,3 +1,4 @@
+import { useState } from '@wordpress/element';
 import type { BlockEditProps } from '@wordpress/blocks';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
@@ -19,6 +20,9 @@ export default function Edit( {
 	attributes: { contents },
 	setAttributes,
 }: BlockEditProps< BlockAttributes > ) {
+	// 選択中のタブが何番目かを保持するステート
+	const [ currentTab, setCurrentTab ] = useState( 0 );
+
 	return (
 		<div { ...useBlockProps() }>
 			<div className="mb-2">
@@ -28,6 +32,7 @@ export default function Edit( {
 						setAttributes( {
 							contents: [ ...contents, defaultContents ],
 						} );
+						setCurrentTab( contents.length );
 					} }
 				>
 					{ __( 'Add Tab', 'chiilog-iapi-tabs' ) }
@@ -39,17 +44,21 @@ export default function Edit( {
 			>
 				{ contents.map( ( tabItem, index ) => {
 					const tabId = index + 1;
-					const isLastTab = index === contents.length - 1;
 
 					return (
 						<button
 							role="tab"
 							className="wp-block-chiilog-blocks-iapi-tabs__button"
-							aria-selected={ isLastTab ? 'true' : 'false' }
+							aria-selected={
+								currentTab === index ? 'true' : 'false'
+							}
 							id={ `tab-${ tabId }` }
 							aria-controls={ `panel-${ tabId }` }
-							tabIndex={ isLastTab ? 0 : -1 }
+							tabIndex={ currentTab === index ? 0 : -1 }
 							key={ index }
+							onClick={ () => {
+								setCurrentTab( index );
+							} }
 						>
 							<RichText
 								value={ tabItem.tabNavText }
