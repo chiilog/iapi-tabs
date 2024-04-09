@@ -164,7 +164,10 @@ export default function Edit( {
 									<Button
 										size="small"
 										icon={ close }
-										label="削除"
+										label={ __(
+											'Remove Tab',
+											'chiilog-iapi-tabs'
+										) }
 										onClick={ () => {
 											removeNavItem( index );
 											setCurrentTab( 0 );
