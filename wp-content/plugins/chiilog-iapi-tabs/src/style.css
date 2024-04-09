@@ -14,7 +14,7 @@
 	}
 }
 
-.wp-block-chiilog-blocks-iapi-tabs__panel {
+.wp-block-chiilog-blocks-iapi-tabs-panel {
 	@apply border-0 border-t-4 border-solid border-red-400 p-4 hidden;
 
 	&[aria-hidden="false"] {

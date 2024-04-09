@@ -1,10 +1,15 @@
-import { useDispatch } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { useState } from '@wordpress/element';
-import { type BlockEditProps, createBlock } from '@wordpress/blocks';
+import {
+	type BlockEditProps,
+	type BlockInstance,
+	createBlock,
+} from '@wordpress/blocks';
 import {
 	RichText,
 	useBlockProps,
 	useInnerBlocksProps,
+	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -22,17 +27,20 @@ const defaultContents: TabItem = {
 	tabNavText: '',
 };
 
+const panelBlockName: string = 'chiilog-blocks/iapi-tabs-panel';
+
 export default function Edit( {
 	attributes: { contents },
 	setAttributes,
 	clientId,
 }: BlockEditProps< BlockAttributes > ) {
-	const { insertBlocks } = useDispatch( 'core/block-editor' );
+	const { insertBlocks, updateBlockAttributes } =
+		useDispatch( 'core/block-editor' );
 
 	// 選択中のタブが何番目かを保持するステート
 	const [ currentTab, setCurrentTab ] = useState( 0 );
 
-	const ALLOWED_BLOCKS = [ 'chiilog-iapi-tabs/panel' ];
+	const ALLOWED_BLOCKS = [ panelBlockName ];
 	const innerBlocksProps = useInnerBlocksProps(
 		{},
 		{
@@ -41,6 +49,27 @@ export default function Edit( {
 			renderAppender: false,
 		}
 	);
+
+	const blocks: BlockInstance[] = useSelect(
+		// @ts-ignore
+		( select ) => select( blockEditorStore ).getBlocks( clientId ),
+		[ clientId ]
+	);
+
+	const updatePanelsVisibility = ( selectedIndex: number ) => {
+		blocks.forEach( ( block: BlockInstance, index: number ) => {
+			if ( block.name === panelBlockName ) {
+				const isVisible = index === selectedIndex;
+				updateBlockAttributes( block.clientId, {
+					ariaExpanded: isVisible,
+					ariaHidden: ! isVisible,
+				} );
+			}
+			console.log( blocks );
+			console.log( `selectedIndex: ${ selectedIndex }` );
+			console.log( `index: ${ index }` );
+		} );
+	};
 
 	return (
 		<div { ...useBlockProps() }>
@@ -53,12 +82,12 @@ export default function Edit( {
 						} );
 						setCurrentTab( contents.length );
 						const createPanel = createBlock(
-							'chiilog-blocks/iapi-tabs-panel',
+							panelBlockName,
 							{
 								panelId: `panel-${ contents.length + 1 }`,
 								ariaLabelledby: `tab-${ contents.length + 1 }`,
-								ariaExpanded: contents.length === 0,
-								ariaHidden: contents.length !== 0,
+								ariaExpanded: contents.length === currentTab,
+								ariaHidden: contents.length !== currentTab,
 							},
 							[
 								createBlock( 'core/paragraph', {
@@ -70,6 +99,12 @@ export default function Edit( {
 							]
 						);
 						insertBlocks( createPanel, contents.length, clientId );
+
+						// デバッグ用
+						setTimeout(
+							() => updatePanelsVisibility( contents.length ),
+							10000
+						);
 					} }
 				>
 					{ __( 'Add Tab', 'chiilog-iapi-tabs' ) }
