@@ -2,15 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-.tab-nav {
+.wp-block-chiilog-blocks-iapi-tabs__nav {
 	@apply flex justify-between gap-x-px p-0 m-0;
 }
 
-.tab-nav__item {
-	@apply flex-1 text-center;
-}
-
-.tab-nav__button {
+.wp-block-chiilog-blocks-iapi-tabs__button {
 	@apply appearance-none bg-gray-200 block py-2.5 px-3 font-bold border-none w-full;
 
 	&[aria-selected="true"] {
@@ -18,7 +14,7 @@
 	}
 }
 
-.tab-panel {
+.wp-block-chiilog-blocks-iapi-tabs__panel {
 	@apply border-0 border-t-4 border-solid border-red-400 p-4 hidden;
 
 	&[aria-hidden="false"] {
