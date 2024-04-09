@@ -40,6 +40,7 @@ export default function Edit( {
 	// 選択中のタブが何番目かを保持するステート
 	const [ currentTab, setCurrentTab ] = useState( 0 );
 
+	// インナーブロックの設定まわり
 	const ALLOWED_BLOCKS = [ panelBlockName ];
 	const innerBlocksProps = useInnerBlocksProps(
 		{},
@@ -56,6 +57,50 @@ export default function Edit( {
 		[ clientId ]
 	);
 
+	/**
+	 * タブのナビアイテムを追加する
+	 */
+	const addNavItem = () => {
+		setAttributes( {
+			contents: [ ...contents, defaultContents ],
+		} );
+	};
+
+	/**
+	 * タブのナビアイテムを削除する
+	 */
+	const removeNavItem = ( index: number ) => {
+		const newContents = [ ...contents ];
+		newContents.splice( index, 1 );
+		setAttributes( {
+			contents: newContents,
+		} );
+	};
+
+	/**
+	 * タブのパネルを追加する
+	 */
+	const addNavPanel = ( index: number ) => {
+		const createPanel = createBlock(
+			panelBlockName,
+			{
+				panelId: `panel-${ index + 1 }`,
+				ariaLabelledby: `tab-${ index + 1 }`,
+				ariaExpanded: index === currentTab,
+				ariaHidden: index !== currentTab,
+			},
+			[
+				createBlock( 'core/paragraph', {
+					content: __( 'Tab Content', 'chiilog-iapi-tabs' ),
+				} ),
+			]
+		);
+		insertBlocks( createPanel, index, clientId );
+	};
+
+	/**
+	 * タブのパネルのカレントを更新する
+	 */
 	const updatePanelsVisibility = ( selectedIndex: number ) => {
 		blocks.forEach( ( block: BlockInstance, index: number ) => {
 			if ( block.name === panelBlockName ) {
@@ -77,34 +122,10 @@ export default function Edit( {
 				<Button
 					variant="secondary"
 					onClick={ () => {
-						setAttributes( {
-							contents: [ ...contents, defaultContents ],
-						} );
+						addNavItem();
 						setCurrentTab( contents.length );
-						const createPanel = createBlock(
-							panelBlockName,
-							{
-								panelId: `panel-${ contents.length + 1 }`,
-								ariaLabelledby: `tab-${ contents.length + 1 }`,
-								ariaExpanded: contents.length === currentTab,
-								ariaHidden: contents.length !== currentTab,
-							},
-							[
-								createBlock( 'core/paragraph', {
-									content: __(
-										'Tab Content',
-										'chiilog-iapi-tabs'
-									),
-								} ),
-							]
-						);
-						insertBlocks( createPanel, contents.length, clientId );
-
-						// デバッグ用
-						setTimeout(
-							() => updatePanelsVisibility( contents.length ),
-							10000
-						);
+						addNavPanel( contents.length );
+						updatePanelsVisibility( contents.length );
 					} }
 				>
 					{ __( 'Add Tab', 'chiilog-iapi-tabs' ) }
@@ -129,11 +150,7 @@ export default function Edit( {
 										icon={ close }
 										label="削除"
 										onClick={ () => {
-											const newContents = [ ...contents ];
-											newContents.splice( index, 1 );
-											setAttributes( {
-												contents: newContents,
-											} );
+											removeNavItem( index );
 											setCurrentTab( 0 );
 										} }
 									/>
