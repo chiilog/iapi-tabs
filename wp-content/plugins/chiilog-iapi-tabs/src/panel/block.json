@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "chiilog-blocks/iapi-tabs-panel",
+	"version": "0.1.0",
+	"title": "IAPI Tabs Panel",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "",
+	"attributes": {},
+	"supports": {
+		"interactivity": true
+	},
+	"parent": [ "chiilog-blocks/iapi-tabs" ],
+	"textdomain": "chiilog-iapi-tabs-panel",
+	"editorScript": "file:./index.js"
+}
