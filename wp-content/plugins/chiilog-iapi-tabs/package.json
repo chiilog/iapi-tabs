@@ -15,9 +15,9 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"dev:wp-scripts": "wp-scripts start --experimental-modules",
-		"dev:css": "tailwindcss -i ./src/style.css -o ./build/style.css --watch",
+		"dev:css": "tailwindcss -i src/style.css -o ./build/style.css --watch",
 		"build:wp-scripts": "wp-scripts build --experimental-modules",
-		"build:css": "tailwindcss -i ./src/style.css -o ./build/style.css"
+		"build:css": "tailwindcss -i src/style.css -o ./build/style.css"
 	},
 	"devDependencies": {
 		"@types/wordpress__block-editor": "^11.5.14",
