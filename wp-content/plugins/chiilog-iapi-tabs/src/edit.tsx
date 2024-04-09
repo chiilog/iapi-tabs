@@ -3,6 +3,7 @@ import type { BlockEditProps } from '@wordpress/blocks';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import { close } from '@wordpress/icons';
 
 type BlockAttributes = {
 	contents: TabItem[];
@@ -46,36 +47,58 @@ export default function Edit( {
 					const tabId = index + 1;
 
 					return (
-						<button
-							role="tab"
-							className="wp-block-chiilog-blocks-iapi-tabs__button"
-							aria-selected={
-								currentTab === index ? 'true' : 'false'
-							}
-							id={ `tab-${ tabId }` }
-							aria-controls={ `panel-${ tabId }` }
-							tabIndex={ currentTab === index ? 0 : -1 }
-							key={ index }
-							onClick={ () => {
-								setCurrentTab( index );
-							} }
-						>
-							<RichText
-								value={ tabItem.tabNavText }
-								tagName="span"
-								onChange={ ( value ) => {
-									const newContents = [ ...contents ];
-									newContents[ index ] = {
-										...contents[ index ],
-										tabNavText: value,
-									};
-									setAttributes( {
-										contents: newContents,
-									} );
+						<div className="flex flex-col gap-1 flex-auto">
+							{ currentTab === index ? (
+								<div>
+									<Button
+										size="small"
+										icon={ close }
+										label="削除"
+										onClick={ () => {
+											const newContents = [ ...contents ];
+											newContents.splice( index, 1 );
+											setAttributes( {
+												contents: newContents,
+											} );
+										} }
+									/>
+								</div>
+							) : null }
+
+							<button
+								role="tab"
+								className="wp-block-chiilog-blocks-iapi-tabs__button mt-auto"
+								aria-selected={
+									currentTab === index ? 'true' : 'false'
+								}
+								id={ `tab-${ tabId }` }
+								aria-controls={ `panel-${ tabId }` }
+								tabIndex={ currentTab === index ? 0 : -1 }
+								key={ index }
+								onClick={ () => {
+									setCurrentTab( index );
 								} }
-								placeholder={ __( 'Tab', 'chiilog-iapi-tabs' ) }
-							/>
-						</button>
+							>
+								<RichText
+									value={ tabItem.tabNavText }
+									tagName="span"
+									onChange={ ( value ) => {
+										const newContents = [ ...contents ];
+										newContents[ index ] = {
+											...contents[ index ],
+											tabNavText: value,
+										};
+										setAttributes( {
+											contents: newContents,
+										} );
+									} }
+									placeholder={ __(
+										'Tab',
+										'chiilog-iapi-tabs'
+									) }
+								/>
+							</button>
+						</div>
 					);
 				} ) }
 			</div>
