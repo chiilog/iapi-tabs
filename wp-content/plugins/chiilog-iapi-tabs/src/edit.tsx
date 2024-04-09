@@ -37,63 +37,38 @@ export default function Edit( {
 				className="wp-block-chiilog-blocks-iapi-tabs__nav"
 				role="tablist"
 			>
-				{ contents.map( ( tabItem, index ) => (
-					<button
-						role="tab"
-						className="wp-block-chiilog-blocks-iapi-tabs__button"
-						aria-selected="true"
-						id={ `tab-${ index }` }
-						aria-controls={ `panel-${ index }` }
-						tabIndex={ 0 }
-						key={ index }
-					>
-						<RichText
-							value={ tabItem.tabNavText }
-							tagName="span"
-							onChange={ ( value ) => {
-								const newContents = [ ...contents ];
-								newContents[ index ] = {
-									...contents[ index ],
-									tabNavText: value,
-								};
-								setAttributes( {
-									contents: newContents,
-								} );
-							} }
-							placeholder={ __( 'Tab', 'chiilog-iapi-tabs' ) }
-						/>
-					</button>
-				) ) }
-				<button
-					role="tab"
-					className="wp-block-chiilog-blocks-iapi-tabs__button"
-					aria-selected="true"
-					id="tab-1"
-					aria-controls="panel-1"
-					tabIndex={ 0 }
-				>
-					ナビ1
-				</button>
-				<button
-					role="tab"
-					className="wp-block-chiilog-blocks-iapi-tabs__button"
-					aria-selected="false"
-					id="tab-2"
-					aria-controls="panel-2"
-					tabIndex={ -1 }
-				>
-					ナビ2
-				</button>
-				<button
-					role="tab"
-					className="wp-block-chiilog-blocks-iapi-tabs__button"
-					aria-selected="false"
-					id="tab-3"
-					aria-controls="panel-3"
-					tabIndex={ -1 }
-				>
-					ナビ3
-				</button>
+				{ contents.map( ( tabItem, index ) => {
+					const tabId = index + 1;
+					const isLastTab = index === contents.length - 1;
+
+					return (
+						<button
+							role="tab"
+							className="wp-block-chiilog-blocks-iapi-tabs__button"
+							aria-selected={ isLastTab ? 'true' : 'false' }
+							id={ `tab-${ tabId }` }
+							aria-controls={ `panel-${ tabId }` }
+							tabIndex={ isLastTab ? 0 : -1 }
+							key={ index }
+						>
+							<RichText
+								value={ tabItem.tabNavText }
+								tagName="span"
+								onChange={ ( value ) => {
+									const newContents = [ ...contents ];
+									newContents[ index ] = {
+										...contents[ index ],
+										tabNavText: value,
+									};
+									setAttributes( {
+										contents: newContents,
+									} );
+								} }
+								placeholder={ __( 'Tab', 'chiilog-iapi-tabs' ) }
+							/>
+						</button>
+					);
+				} ) }
 			</div>
 			<div
 				id="panel-1"
