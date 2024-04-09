@@ -56,6 +56,10 @@ export default function Edit( {
 		[ clientId ]
 	);
 
+	/**
+	 * 2回目以降のblocks追加でうまくblocksが取得できないため、
+	 * blocksが更新されたタイミングでパネルの表示を更新する
+	 */
 	useEffect( () => {
 		if ( blocks.length > 0 ) {
 			updatePanelsVisibility( currentTab );
@@ -176,6 +180,7 @@ export default function Edit( {
 								tabIndex={ currentTab === index ? 0 : -1 }
 								onClick={ () => {
 									setCurrentTab( index );
+									updatePanelsVisibility( index );
 								} }
 							>
 								<RichText
