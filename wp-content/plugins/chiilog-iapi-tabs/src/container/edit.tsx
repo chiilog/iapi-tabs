@@ -34,7 +34,7 @@ export default function Edit( {
 	setAttributes,
 	clientId,
 }: BlockEditProps< BlockAttributes > ) {
-	const { insertBlocks, updateBlockAttributes } =
+	const { insertBlocks, removeBlocks, updateBlockAttributes } =
 		useDispatch( 'core/block-editor' );
 
 	// 選択中のタブが何番目かを保持するステート
@@ -111,6 +111,13 @@ export default function Edit( {
 	};
 
 	/**
+	 * タブのパネルを削除する
+	 */
+	const removeNavPanel = ( index: number ) => {
+		removeBlocks( blocks[ index ].clientId, false );
+	};
+
+	/**
 	 * タブのパネルのカレントを更新する
 	 */
 	const updatePanelsVisibility = ( selectedIndex: number ) => {
@@ -122,9 +129,6 @@ export default function Edit( {
 					ariaHidden: ! isVisible,
 				} );
 			}
-			console.log( blocks );
-			console.log( `selectedIndex: ${ selectedIndex }` );
-			console.log( `index: ${ index }` );
 		} );
 	};
 
@@ -164,6 +168,8 @@ export default function Edit( {
 										onClick={ () => {
 											removeNavItem( index );
 											setCurrentTab( 0 );
+											removeNavPanel( index );
+											updatePanelsVisibility( 0 );
 										} }
 									/>
 								</>
