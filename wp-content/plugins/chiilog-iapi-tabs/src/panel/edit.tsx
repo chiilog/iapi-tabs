@@ -1,15 +1,25 @@
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import type { BlockEditProps } from '@wordpress/blocks';
 
-export default function Edit( {} ) {
+type BlockAttributes = {
+	panelId: string;
+	ariaLabelledby: string;
+	ariaExpanded: boolean;
+	ariaHidden: boolean;
+};
+
+export default function Edit( {
+	attributes: { panelId, ariaLabelledby, ariaExpanded, ariaHidden },
+}: BlockEditProps< BlockAttributes > ) {
 	return (
 		<div
 			{ ...useBlockProps() }
-			id="panel-1"
+			id={ panelId }
 			role="tabpanel"
 			tabIndex={ 0 }
-			aria-labelledby="tab-1"
-			aria-expanded="true"
-			aria-hidden="false"
+			aria-labelledby={ ariaLabelledby }
+			aria-expanded={ ariaExpanded }
+			aria-hidden={ ariaHidden }
 		>
 			<div { ...useInnerBlocksProps() } />
 		</div>

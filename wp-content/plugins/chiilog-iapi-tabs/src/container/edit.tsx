@@ -34,9 +34,7 @@ export default function Edit( {
 
 	const ALLOWED_BLOCKS = [ 'chiilog-iapi-tabs/panel' ];
 	const innerBlocksProps = useInnerBlocksProps(
-		{
-			className: 'smb-tabs__body',
-		},
+		{},
 		{
 			allowedBlocks: ALLOWED_BLOCKS,
 			// @ts-ignore
@@ -56,7 +54,12 @@ export default function Edit( {
 						setCurrentTab( contents.length );
 						const createPanel = createBlock(
 							'chiilog-blocks/iapi-tabs-panel',
-							{},
+							{
+								panelId: `panel-${ contents.length + 1 }`,
+								ariaLabelledby: `tab-${ contents.length + 1 }`,
+								ariaExpanded: contents.length === 0,
+								ariaHidden: contents.length !== 0,
+							},
 							[
 								createBlock( 'core/paragraph', {
 									content: __(

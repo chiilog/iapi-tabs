@@ -7,7 +7,24 @@
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "",
-	"attributes": {},
+	"attributes": {
+		"panelId": {
+			"type": "string",
+			"default": ""
+		},
+		"ariaLabelledby": {
+			"type": "string",
+			"default": ""
+		},
+		"ariaExpanded": {
+			"type": "boolean",
+			"default": true
+		},
+		"ariaHidden": {
+			"type": "boolean",
+			"default": false
+		}
+	},
 	"supports": {
 		"interactivity": true
 	},
