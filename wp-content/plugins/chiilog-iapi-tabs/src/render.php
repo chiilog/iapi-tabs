@@ -11,10 +11,10 @@
 	<?php echo get_block_wrapper_attributes(); ?>
 	data-wp-interactive="iapiTabs"
 >
-	<div class="tab-nav" role="tablist">
+	<div class="wp-block-chiilog-blocks-iapi-tabs__nav" role="tablist">
 		<button
 			role="tab"
-			class="tab-nav__button"
+			class="wp-block-chiilog-blocks-iapi-tabs__button"
 			data-wp-on--click="actions.selectTab"
 			aria-selected="true"
 			id="tab-1"
@@ -25,7 +25,7 @@
 		</button>
 		<button
 			role="tab"
-			class="tab-nav__button"
+			class="wp-block-chiilog-blocks-iapi-tabs__button"
 			data-wp-on--click="actions.selectTab"
 			aria-selected="false"
 			id="tab-2"
@@ -36,7 +36,7 @@
 		</button>
 		<button
 			role="tab"
-			class="tab-nav__button"
+			class="wp-block-chiilog-blocks-iapi-tabs__button"
 			data-wp-on--click="actions.selectTab"
 			aria-selected="false"
 			id="tab-3"
@@ -51,7 +51,7 @@
 		role="tabpanel"
 		tabindex="0"
 		aria-labelledby="tab-1"
-		class="tab-panel"
+		class="wp-block-chiilog-blocks-iapi-tabs__panel"
 		aria-expanded="true"
 		aria-hidden="false"
 	>
@@ -62,7 +62,7 @@
 		role="tabpanel"
 		tabindex="0"
 		aria-labelledby="tab-2"
-		class="tab-panel"
+		class="wp-block-chiilog-blocks-iapi-tabs__panel"
 		aria-expanded="false"
 		aria-hidden="true"
 	>
@@ -73,7 +73,7 @@
 		role="tabpanel"
 		tabindex="0"
 		aria-labelledby="tab-3"
-		class="tab-panel"
+		class="wp-block-chiilog-blocks-iapi-tabs__panel"
 		aria-expanded="false"
 		aria-hidden="true"
 	>
