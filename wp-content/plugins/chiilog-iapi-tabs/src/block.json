@@ -1,13 +1,23 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "create-block/chiilog-iapi-tabs",
+	"name": "chiilog-blocks/iapi-tabs",
 	"version": "0.1.0",
 	"title": "IAPI Tabs",
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
-	"example": {},
+	"attributes": {
+		"contents": {
+			"type": "array",
+			"default": []
+		},
+		"tabNavText": {
+			"type": "string",
+			"source": "text",
+			"selector": ".wp-block-chiilog-blocks-iapi-tabs__button span"
+		}
+	},
 	"supports": {
 		"interactivity": true
 	},
