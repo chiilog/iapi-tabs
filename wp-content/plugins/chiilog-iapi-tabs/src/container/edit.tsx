@@ -1,5 +1,5 @@
 import { useDispatch, useSelect } from '@wordpress/data';
-import { useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import {
 	type BlockEditProps,
 	type BlockInstance,
@@ -50,12 +50,17 @@ export default function Edit( {
 			renderAppender: false,
 		}
 	);
-
 	const blocks: BlockInstance[] = useSelect(
 		// @ts-ignore
 		( select ) => select( blockEditorStore ).getBlocks( clientId ),
 		[ clientId ]
 	);
+
+	useEffect( () => {
+		if ( blocks.length > 0 ) {
+			updatePanelsVisibility( currentTab );
+		}
+	}, [ blocks ] );
 
 	/**
 	 * タブのナビアイテムを追加する
@@ -91,7 +96,10 @@ export default function Edit( {
 			},
 			[
 				createBlock( 'core/paragraph', {
-					content: __( 'Tab Content', 'chiilog-iapi-tabs' ),
+					content: __(
+						`Tab Content : ${ index }`,
+						'chiilog-iapi-tabs'
+					),
 				} ),
 			]
 		);
