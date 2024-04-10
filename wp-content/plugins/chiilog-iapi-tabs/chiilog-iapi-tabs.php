@@ -39,12 +39,18 @@ add_action( 'init', 'create_block_chiilog_iapi_tabs_block_init' );
  */
 function add_directives_to_inner_blocks( $block_content, $block ) {
 	$panels = new WP_HTML_Tag_Processor( $block_content );
+	$panelCount = 0;
 
-	if ( $panels->next_tag( array( 'class_name' => 'wp-block-chiilog-blocks-iapi-tabs-panel' ) ) ) {
-		$panels->set_attribute( 'data-wp-bind--aria-expanded', 'false' );
-		$panels->set_attribute( 'data-wp-bind--aria-hidden', 'true' );
+	while ( $panels->next_tag() ) {
+		foreach ( $panels->class_list() as $class_name ) {
+			if ( $class_name === 'wp-block-chiilog-blocks-iapi-tabs-panel' ) {
+				$panels->set_attribute( 'data-wp-bind--aria-expanded', $panelCount === 0);
+				$panels->set_attribute( 'data-wp-bind--aria-hidden', $panelCount !== 0 );
+				$panelCount++;
+			}
+		}
 	}
 
 	return $panels->get_updated_html();
 }
-add_filter( 'render_block_chiilog-blocks/iapi-tabs-panel', 'add_directives_to_inner_blocks', 10, 2 );
+add_filter( 'render_block_chiilog-blocks/iapi-tabs', 'add_directives_to_inner_blocks', 10, 2 );
