@@ -31,7 +31,7 @@ wp_interactivity_state( 'iapiTabs', array (
 					data-wp-bind--aria-selected="state.tabSelected"
 					id="tab-<?php echo esc_attr( $tabNumber ); ?>"
 					aria-controls="panel-<?php echo esc_attr( $tabNumber ); ?>"
-					tabindex="<?php echo esc_attr( $index === 0 ? '0' : '-1' ); ?>"
+					data-wp-bind--tabindex="state.tabIndex"
 					data-wp-context='{ "position": <?php echo esc_attr( $index ); ?> }'
 				>
 					<?php echo esc_html( $navItem['tabNavText'] ); ?>

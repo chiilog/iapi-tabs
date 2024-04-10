@@ -17,6 +17,10 @@ const { state, actions } = store( 'iapiTabs', {
 			const ctx = getContext();
 			return ctx.position === state.currentTab;
 		},
+		get tabIndex() {
+			const ctx = getContext();
+			return ctx.position === state.currentTab ? 0 : -1;
+		},
 	},
 	actions: {
 		changeCurrentTab: () => {
