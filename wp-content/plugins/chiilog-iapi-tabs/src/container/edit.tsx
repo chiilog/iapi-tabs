@@ -87,6 +87,20 @@ export default function Edit( {
 	};
 
 	/**
+	 * タブのテキストを更新する
+	 */
+	const updateNavItemText = ( index: number, value: string ) => {
+		const newContents = [ ...contents ];
+		newContents[ index ] = {
+			...contents[ index ],
+			tabNavText: value,
+		};
+		setAttributes( {
+			contents: newContents,
+		} );
+	};
+
+	/**
 	 * タブのパネルを追加する
 	 */
 	const addNavPanel = ( index: number ) => {
@@ -196,14 +210,7 @@ export default function Edit( {
 									value={ tabItem.tabNavText }
 									tagName="span"
 									onChange={ ( value ) => {
-										const newContents = [ ...contents ];
-										newContents[ index ] = {
-											...contents[ index ],
-											tabNavText: value,
-										};
-										setAttributes( {
-											contents: newContents,
-										} );
+										updateNavItemText( index, value );
 									} }
 									placeholder={ __(
 										'Tab',
