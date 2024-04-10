@@ -9,7 +9,6 @@
 .wp-block-chiilog-blocks-iapi-tabs__button {
 	@apply appearance-none bg-gray-200 block py-2.5 px-3 font-bold border-none w-full;
 
-	&[data-wp-bind--aria-expanded="true"],
 	&[aria-selected="true"] {
 		@apply bg-red-400 text-white;
 	}
@@ -18,7 +17,6 @@
 .wp-block-chiilog-blocks-iapi-tabs-panel {
 	@apply border-0 border-t-4 border-solid border-red-400 p-4 hidden;
 
-	&[data-wp-bind--aria-hidden="false"],
 	&[aria-hidden="false"] {
 		@apply block;
 	}
