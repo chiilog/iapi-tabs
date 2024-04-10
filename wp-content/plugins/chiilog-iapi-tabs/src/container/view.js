@@ -1,13 +1,27 @@
 /**
  * WordPress dependencies
  */
-import { store } from '@wordpress/interactivity';
+import { getContext, store } from '@wordpress/interactivity';
 
-store( 'iapiTabs', {
-	state: {},
+const { state, actions } = store( 'iapiTabs', {
+	state: {
+		get panelExpanded() {
+			const ctx = getContext();
+			return ctx.position === state.currentTab;
+		},
+		get panelHidden() {
+			const ctx = getContext();
+			return ctx.position !== state.currentTab;
+		},
+		get tabSelected() {
+			const ctx = getContext();
+			return ctx.position === state.currentTab;
+		},
+	},
 	actions: {
-		selectTab: () => {
-			console.log( 'click' );
+		changeCurrentTab: () => {
+			const ctx = getContext();
+			state.currentTab = ctx.position;
 		},
 	},
 	callbacks: {},

@@ -44,8 +44,9 @@ function add_directives_to_inner_blocks( $block_content, $block ) {
 	while ( $panels->next_tag() ) {
 		foreach ( $panels->class_list() as $class_name ) {
 			if ( $class_name === 'wp-block-chiilog-blocks-iapi-tabs-panel' ) {
-				$panels->set_attribute( 'data-wp-bind--aria-expanded', $panelCount === 0);
-				$panels->set_attribute( 'data-wp-bind--aria-hidden', $panelCount !== 0 );
+				$panels->set_attribute( 'data-wp-bind--aria-expanded', 'state.panelExpanded' );
+				$panels->set_attribute( 'data-wp-bind--aria-hidden', 'state.panelHidden' );
+				$panels->set_attribute( 'data-wp-context', '{ "position": ' . $panelCount . ' }' );
 				$panelCount++;
 			}
 		}
