@@ -29,3 +29,22 @@ function create_block_chiilog_iapi_tabs_block_init() {
 	register_block_type( __DIR__ . '/build/panel' );
 }
 add_action( 'init', 'create_block_chiilog_iapi_tabs_block_init' );
+
+/**
+ * パネルの aria-expanded と aria-hidden を data-wp-bind--xxx に変換する
+ *
+ * @param $block_content
+ * @param $block
+ * @return string
+ */
+function add_directives_to_inner_blocks( $block_content, $block ) {
+	$panels = new WP_HTML_Tag_Processor( $block_content );
+
+	if ( $panels->next_tag( array( 'class_name' => 'wp-block-chiilog-blocks-iapi-tabs-panel' ) ) ) {
+		$panels->set_attribute( 'data-wp-bind--aria-expanded', 'false' );
+		$panels->set_attribute( 'data-wp-bind--aria-hidden', 'true' );
+	}
+
+	return $panels->get_updated_html();
+}
+add_filter( 'render_block_chiilog-blocks/iapi-tabs-panel', 'add_directives_to_inner_blocks', 10, 2 );
