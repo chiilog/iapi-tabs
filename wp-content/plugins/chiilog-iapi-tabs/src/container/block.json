@@ -19,7 +19,8 @@
 		}
 	},
 	"supports": {
-		"interactivity": true
+		"interactivity": true,
+		"anchor": true
 	},
 	"textdomain": "chiilog-iapi-tabs",
 	"editorScript": "file:./index.js",
