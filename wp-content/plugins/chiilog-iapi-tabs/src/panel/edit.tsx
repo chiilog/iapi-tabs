@@ -5,16 +5,18 @@ import type { BlockAttributes } from './type';
 export default function Edit( {
 	attributes: { panelId, ariaLabelledby, ariaExpanded, ariaHidden },
 }: BlockEditProps< BlockAttributes > ) {
+	const blockProps = useBlockProps();
+	const innerBlocksProps = useInnerBlocksProps( blockProps );
+
 	return (
 		<div
-			{ ...useBlockProps( { anchor: panelId } ) }
+			{ ...innerBlocksProps }
+			id={ panelId }
 			role="tabpanel"
 			tabIndex={ 0 }
 			aria-labelledby={ ariaLabelledby }
 			aria-expanded={ ariaExpanded }
 			aria-hidden={ ariaHidden }
-		>
-			<div { ...useInnerBlocksProps() } />
-		</div>
+		/>
 	);
 }
