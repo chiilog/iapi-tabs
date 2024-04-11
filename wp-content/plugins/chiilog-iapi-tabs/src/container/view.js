@@ -1,31 +1,31 @@
 /**
  * WordPress dependencies
  */
-import { getContext, store } from '@wordpress/interactivity';
+import { getContext, getElement, store } from '@wordpress/interactivity';
 
-const { state, actions } = store( 'iapiTabs', {
+const { state, actions } = store( `chiilog-iapi-tabs`, {
 	state: {
 		get panelExpanded() {
 			const ctx = getContext();
-			return ctx.position === state.currentTab;
+			return ctx.position === ctx.currentTab;
 		},
 		get panelHidden() {
 			const ctx = getContext();
-			return ctx.position !== state.currentTab;
+			return ctx.position !== ctx.currentTab;
 		},
 		get tabSelected() {
 			const ctx = getContext();
-			return ctx.position === state.currentTab;
+			return ctx.position === ctx.currentTab;
 		},
 		get tabIndex() {
 			const ctx = getContext();
-			return ctx.position === state.currentTab ? 0 : -1;
+			return ctx.position === ctx.currentTab ? 0 : -1;
 		},
 	},
 	actions: {
 		changeCurrentTab: () => {
 			const ctx = getContext();
-			state.currentTab = ctx.position;
+			ctx.currentTab = ctx.position;
 		},
 	},
 	callbacks: {},

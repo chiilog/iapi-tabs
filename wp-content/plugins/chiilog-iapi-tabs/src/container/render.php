@@ -10,14 +10,17 @@
 $navItems    = $attributes['contents'];
 $tabClientId = $attributes['tabClientId'];
 
-wp_interactivity_state( 'iapiTabs', array (
-	'currentTab' => 0
-));
+$context = array(
+	'tabClientId' => $tabClientId,
+	'currentTab'  => 0,
+);
 
 ?>
 <div
 	<?php echo get_block_wrapper_attributes(); ?>
-	data-wp-interactive="iapiTabs"
+	data-wp-interactive="chiilog-iapi-tabs"
+	data-tab-client-id="<?php echo esc_attr( $tabClientId ); ?>"
+	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >
 	<div class="wp-block-chiilog-blocks-iapi-tabs__nav" role="tablist">
 		<?php
@@ -37,7 +40,7 @@ wp_interactivity_state( 'iapiTabs', array (
 				>
 					<?php echo esc_html( $navItem['tabNavText'] ); ?>
 				</button>
-				<?php
+			<?php
 			endforeach;
 		endif;
 		?>
