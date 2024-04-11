@@ -17,6 +17,7 @@ import { close } from '@wordpress/icons';
 
 type BlockAttributes = {
 	contents: TabItem[];
+	tabClientId: string;
 };
 
 type TabItem = {
@@ -30,7 +31,7 @@ const defaultContents: TabItem = {
 const panelBlockName: string = 'chiilog-blocks/iapi-tabs-panel';
 
 export default function Edit( {
-	attributes: { contents },
+	attributes: { contents, tabClientId },
 	setAttributes,
 	clientId,
 }: BlockEditProps< BlockAttributes > ) {
@@ -56,11 +57,20 @@ export default function Edit( {
 		[ clientId ]
 	);
 
-	/**
-	 * 2回目以降のblocks追加でうまくblocksが取得できないため、
-	 * blocksが更新されたタイミングでパネルの表示を更新する
-	 */
 	useEffect( () => {
+		/**
+		 * tabClientIdにclientIdをセットする
+		 */
+		if ( ! tabClientId ) {
+			setAttributes( {
+				tabClientId: clientId,
+			} );
+		}
+
+		/**
+		 * 2回目以降のblocks追加でうまくblocksが取得できないため、
+		 * blocksが更新されたタイミングでパネルの表示を更新する。
+		 */
 		if ( blocks.length > 0 ) {
 			updatePanelsVisibility( currentTab );
 		}

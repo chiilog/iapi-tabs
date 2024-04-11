@@ -16,6 +16,10 @@
 			"type": "string",
 			"source": "text",
 			"selector": ".wp-block-chiilog-blocks-iapi-tabs__button span"
+		},
+		"tabClientId": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"supports": {

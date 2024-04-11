@@ -46,6 +46,7 @@ function add_directives_to_inner_blocks( $block_content, $block ) {
 			if ( $class_name === 'wp-block-chiilog-blocks-iapi-tabs-panel' ) {
 				$panels->set_attribute( 'data-wp-bind--aria-expanded', 'state.panelExpanded' );
 				$panels->set_attribute( 'data-wp-bind--aria-hidden', 'state.panelHidden' );
+				$panels->set_attribute( 'id', 'panel-' . $block['attrs']['tabClientId'] . '-' . $panelCount );
 				$panels->set_attribute( 'data-wp-context', '{ "position": ' . $panelCount . ' }' );
 				$panelCount++;
 			}

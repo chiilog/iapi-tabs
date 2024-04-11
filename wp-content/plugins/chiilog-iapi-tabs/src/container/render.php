@@ -7,7 +7,8 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
-$navItems = $attributes['contents'];
+$navItems    = $attributes['contents'];
+$tabClientId = $attributes['tabClientId'];
 
 wp_interactivity_state( 'iapiTabs', array (
 	'currentTab' => 0
@@ -29,8 +30,8 @@ wp_interactivity_state( 'iapiTabs', array (
 					class="wp-block-chiilog-blocks-iapi-tabs__button"
 					data-wp-on--click="actions.changeCurrentTab"
 					data-wp-bind--aria-selected="state.tabSelected"
-					id="tab-<?php echo esc_attr( $tabNumber ); ?>"
-					aria-controls="panel-<?php echo esc_attr( $tabNumber ); ?>"
+					id="tab-<?php echo esc_attr( $tabClientId ) . '-' . esc_attr( $tabNumber ); ?>"
+					aria-controls="panel-<?php echo esc_attr( $tabClientId ) . '-' . esc_attr( $tabNumber ); ?>"
 					data-wp-bind--tabindex="state.tabIndex"
 					data-wp-context='{ "position": <?php echo esc_attr( $index ); ?> }'
 				>
