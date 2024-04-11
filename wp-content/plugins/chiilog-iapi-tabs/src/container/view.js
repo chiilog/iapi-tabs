@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { getContext, getElement, store } from '@wordpress/interactivity';
+import { getContext, store } from '@wordpress/interactivity';
 
 const { state, actions } = store( `chiilog-iapi-tabs`, {
 	state: {
