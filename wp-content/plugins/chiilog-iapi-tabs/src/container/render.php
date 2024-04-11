@@ -11,7 +11,6 @@ $navItems    = $attributes['contents'];
 $tabClientId = $attributes['tabClientId'];
 
 $context = array(
-	'tabClientId' => $tabClientId,
 	'currentTab'  => 0,
 );
 
