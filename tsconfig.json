@@ -31,7 +31,5 @@
 		"types": []
 	},
 	"include": [ "**/*.ts", "**/*.tsx", "**/*.json", "**/*.js" ],
-	"exclude": [ "**/build/**", "**/test/**", "vendor",
-		"wp-content/plugins/chiilog-iapi-tabs/node_modules"
-	]
+	"exclude": [ "**/build/**", "**/test/**", "vendor", "node_modules" ]
 }
